@@ -1,0 +1,29 @@
+{% extends "my_admin/template.html" %}
+{%block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 class="text-center">
+                    Кластеризация за час
+                 </h1>
+                <a role="button" class="btn  btn-info center-block" href="/fast_clustering/{{ id_ }}">Визуализаци кластеров</a>
+                 {% for d in data %}
+                    <div class="post-preview">
+                        <a href="/fast_clustering/{{ id_ }}/cluster/{{ d.Id }}">
+                            <h3>
+                            {{ d.title }}
+                            </h3>
+                            <p>
+                            Новостей в кластере: {{ d.size }}
+                            </p>
+                         </a>
+                     </div>
+                     <hr>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <hr>
+{% endblock content%}

@@ -1,0 +1,25 @@
+{% extends "my_admin/template.html" %}
+{%block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 class="text-center">
+                    Кластеризация за день
+                 </h1>
+                {% for cl in clusterings %}
+                    <div class="post-preview">
+                        <a href="/full_clustering/{{ cl.id }}/">
+                            <h3 class="post-title">
+                            Кластеризация от {{ cl.date }}
+                            </h3>
+                         </a>
+                     </div>
+                     <hr>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <hr>
+{% endblock content%}

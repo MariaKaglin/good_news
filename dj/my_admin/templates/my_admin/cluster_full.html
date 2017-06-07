@@ -1,0 +1,74 @@
+{% extends "my_admin/template.html" %}
+
+{%block content %}
+
+
+<article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+	
+	{% if status == 2 %}
+		<a role="button" class="btn  btn-success center-block" href ="/edit/1/{{addr}}">Редактировать</a>
+
+	{% endif %}
+	{% if status == 0 %}
+		<a role="button" class="btn  btn-success center-block" href ="/edit/1/{{addr}}">Написать новость по теме</a>
+	{% endif %}
+	
+	{% if status == 3 %}
+		<div class='alert alert-success text-center'> Новость по теме уже написана </div>
+	{% endif %}
+	{% if status == 1 %}
+		<div class='alert alert-success text-center'>Новость по теме в процессе написания</div>
+	{% endif %}
+
+		{% for n in list_of_news %}
+		    <tr>
+			<h2>{{ n.title }}</h2>
+			<p>{{ n.text }}</p>
+				{% if n.evolution%}
+				  <h3>Сообщалось ранее:</h3>
+				{% endif %}
+				
+					{% for ev in n.evolution %}
+					<blockquote>
+					<tr>
+						<h4>{{ev.title}}</h4>
+						<p>{{ev.text}}</p>
+					</tr>
+					</blockquote>
+					{% endfor %}
+				
+		    </tr>
+		<hr>
+		<p></p>
+		<p></p>
+		<p></p>
+		{% endfor %}			
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+{%endblock content %}
+
+
+
+{% for n in list_of_news %}
+    <tr>
+	<p>{{ n.title }}</p>
+        <p>{{ n.text }}</p>
+	{% if n.evolution%}
+	  Развитие событий
+	{% endif %}
+        {% for ev in n.evolution %}
+	<tr>
+		<p>{{ev.title}}</p>
+		<p>{{ev.text}}</p>
+	</tr>
+	{% endfor %}
+    </tr>
+{% endfor %}
+

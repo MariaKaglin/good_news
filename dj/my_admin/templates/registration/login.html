@@ -1,0 +1,30 @@
+{% extends "my_admin/template.html" %}
+
+{%block content %}
+
+		      {% if form.errors %}
+                <p>Неверный логин или пароль. Пожалуйста, попробуйте еще раз.</p>
+                {% endif %}
+
+                <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+                {% csrf_token %}
+               
+                <table>
+                <thead>
+                    <th style="width:20%;"></th>
+                    <th style="width:100%;"></th>
+                </thead>
+                <tr>
+                    <td>Логин:</td>
+                    <td>{{ form.username }}</td>
+                </tr>
+                <tr>
+                    <td>Пароль:</td>
+                    <td>{{ form.password }}</td>
+                </tr>
+		<td>
+                        <p align="right"><input type="submit"  href="/" class="btn btn-primary" role="button"type="submit" value="Войти" /></p>
+                    </td>
+                </form>
+
+{%endblock content %}

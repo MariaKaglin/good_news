@@ -1,0 +1,46 @@
+{% extends "my_admin/template.html" %}
+{% block content %}
+
+<style>
+#test-viz { margin: 0 auto; overflow: hidden; }
+</style>
+{% load staticfiles %}
+    <script src="{%static 'bubbles-chart.full.js' %}" alt="My image"/>
+    <link rel="stylesheet" media="screen" src="{%static 'bubbles-chart.css' %}"/>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <script>
+        function test(data){
+            var options = {
+                container: "#test",
+                label: "label",
+                size: "size"
+            };
+            var viz = new BubbleChart(options);
+            viz.on("click", function(d) {
+               console.log("mouseclick", d);
+               var dat = $.extend({}, d);
+               delete dat.parent;
+               var str = "/fast_clustering/" + "{{ id_ }}" + "/cluster/" + dat["Id"] 
+               window.location.href = str;
+            });
+            viz.data(data);
+        }
+    </script>
+
+
+    <div class="container text-center">
+        <div class="row">
+                <h1 class="text-center">
+                    Кластеризация за час
+                </h1>
+            <div id="test" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            </div>
+        </div>
+        <a role="button" style="margin-bottom: 3em;" class="btn  btn-info" href="/fast_clustering_list/{{ id_ }}">Список со всеми кластерами</a>
+    </div>
+    <script>$(function() { test({{data | safe}}); });</script>
+{% endblock %}
+
+
